@@ -1,0 +1,36 @@
+<h2 class="page-header">Register</h2>
+
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
+
+<form method="post" action="/u/register">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Tag name: <small>Ex. @tagname (max 10 chars)</small></label>
+                <input type="text" class="form-control" placeholder="@tagname" name="name" maxlength="10">
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" placeholder="Username" name="username">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password2">
+            </div>
+        </div>        
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LoginApp</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            {{#if user}}
+              <li role="presentation"><a href="/u/session">Dashboard</a></li>
+              <li role="presentation"><a href="/u/profile">My account</a></li>
+              <li role="presentation"><a href="/u/logout">Logout</a></li>
+            {{else}}
+              <li role="presentation"><a href="/u/login">Login</a></li>
+              <li role="presentation"><a href="/u/register">Register</a></li>
+            {{/if}}
+          </ul>
+        </nav>
+        <h3 class="text-muted"><a href="/">LoginApp</a></h3>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}
+          
+          {{{body}}}
+        </div>
+
+
+        
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2015 LoginApp, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+    <script>
+        var socket = io.connect();
+
+        // let's assume that the client page, once rendered, knows what room it wants to join
+        var room = "abc123";
+        socket.on('connect', function() {
+           // Connected, let's sign-up for to receive messages for this room
+            socket.emit('room', room);
+            socket.emit('message', room + ': whazzup server?');
+        });
+        socket.on('message', function(data) {
+           console.log('From Server:', data);
+        });
+    </script>
+
+</body>
+</html>

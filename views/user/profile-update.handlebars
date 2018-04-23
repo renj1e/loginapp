@@ -1,0 +1,39 @@
+ <h2 class="page-header">Update Profile</h2>
+<p>Welcome to your profile, <span class="text-bold">{{profile.firstname}}</span></p>  
+
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
+
+<div class="row">
+	<div class="col-sm-6">
+		<form action="/u/profile/post-update/{{user._id}}" method="POST">
+			<input type="hidden" name="schema" value="user">
+			<div class="form-group">
+				<label>Tag name: <small>Ex. @tagname (max 10 chars)</small></label>
+				<input type="text" class="form-control" placeholder="@tagname" name="name" value="{{user.name}}" maxlength="10">
+			</div>
+			<button type="submit" class="btn btn-default">Update</button>
+		</form>
+	</div>
+	<div class="col-sm-6">
+		<form action="/u/profile/post-update/{{profile._id}}" method="POST">
+			<input type="hidden" name="schema" value="profile">
+			<div class="form-group">
+				<label>First Name:</label>
+				<input type="text" class="form-control" placeholder="Name" name="firstname" value="{{profile.firstname}}">
+			</div>
+			<div class="form-group">
+				<label>Middle Name:</label>
+				<input type="text" class="form-control" placeholder="Name" name="middlename" value="{{profile.middlename}}">
+			</div>
+			<div class="form-group">
+				<label>Last Name:</label>
+				<input type="text" class="form-control" placeholder="Name" name="lastname" value="{{profile.lastname}}">
+			</div>
+			<button type="submit" class="btn btn-default">Update</button>
+		</form>
+	</div>
+</div>
